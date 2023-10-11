@@ -1,13 +1,13 @@
 //
 //  ContentView.swift
-//  Swift ToDo
+//  Swift_ToDo
 //
-//  Created by Van Nguyen on 10/10/2023.
+//  Created by Van Nguyen on 11/10/2023.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -19,8 +19,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }

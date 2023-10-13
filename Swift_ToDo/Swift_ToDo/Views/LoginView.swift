@@ -9,8 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-    @State var email = "" // ~ state in react
-    @State var password = ""
+   @StateObject var viewModel = LoginViewViewModel()
     
     var body: some View { // view's body: layout and content to be displayed
         NavigationView { // ~ BrowserRouter in React Router
@@ -18,31 +17,25 @@ struct LoginView: View {
             VStack{ // SwiftUI container: stacks its child views vertically
                 
                 // Header
-                HeaderView()
+                HeaderView(title: "Swift ToDo",
+                           subtitle: "Get things done",
+                           angle: 15,
+                           background: .pink)
                 
                 // Login Form
                 Form{
-                    TextField("Email Address", text: $email)
+                    TextField("Email Address", text: $viewModel.email)
                         .textFieldStyle(DefaultTextFieldStyle())
-                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                    SecureField("Password", text: $viewModel.password)
                         .textFieldStyle(DefaultTextFieldStyle())
-                    Button{
+                    TLButton(title: "Log in",
+                             background: .blue){
                         // Attempt log in
-                    } label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color.blue)
-                            
-                            Text("Log in")
-                                .foregroundColor(Color.white)
-                                .bold()
-                        }
                     }
-                    .padding()
                     
-                    
-                    
-                }
+                }.offset(y:-50)
                 
                 // Create Account
                 VStack{

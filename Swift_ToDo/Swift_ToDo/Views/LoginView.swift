@@ -23,8 +23,6 @@ struct LoginView: View {
                            background: .pink)
                 
                 // Login Form
-             
-                
                 
                 Form{
                     TextField("Email Address", text: $viewModel.email)

@@ -11,7 +11,7 @@ struct RegisterView: View {
     
     
     @StateObject var viewModel = RegisterViewViewModel()
-    
+
     
     var body: some View {
         // main layout
@@ -22,26 +22,30 @@ struct RegisterView: View {
                        angle: -15,
                        background: .orange)
             
-            // Registration form
-            Form{
-                TextField("Full Name", text: $viewModel.name)
-                    .textFieldStyle(DefaultTextFieldStyle())
-                    .autocorrectionDisabled()
-                TextField("Email address", text: $viewModel.email)
-                    .textFieldStyle(DefaultTextFieldStyle())
-                    .autocapitalization(.none)
-                    .autocorrectionDisabled()
-                SecureField("Password", text: $viewModel.password)
-                    .textFieldStyle(DefaultTextFieldStyle())
-                
-                TLButton(title: "Register",
-                         background: .green){
-                    // Attempt registration
-                    viewModel.register()
-                }
-            }
-            .offset(y:-90)
+        
             
+            // Registration form
+            if viewModel.loading { Text("loading...")}
+            else{
+                Form{
+                    TextField("Full Name", text: $viewModel.name)
+                        .textFieldStyle(DefaultTextFieldStyle())
+                        .autocorrectionDisabled()
+                    TextField("Email address", text: $viewModel.email)
+                        .textFieldStyle(DefaultTextFieldStyle())
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
+                    SecureField("Password", text: $viewModel.password)
+                        .textFieldStyle(DefaultTextFieldStyle())
+                    
+                    TLButton(title: "Register",
+                             background: .green){
+                        // Attempt registration
+                        viewModel.register()
+                    }.padding()
+                }
+                .offset(y:-90)
+            }
             
             Spacer()
         }

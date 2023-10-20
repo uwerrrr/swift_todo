@@ -14,13 +14,17 @@ class RegisterViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errMess = ""
+    @Published var loading = false
     
     // when user hit register btn
     init(){}
     
     func register(){
+        loading = true
+        
         // validation
         guard validate() else {
+            loading = false
             return
         }
         
@@ -31,11 +35,13 @@ class RegisterViewViewModel: ObservableObject {
             
             // Check if a user ID is present in the result. If not, exit.
             guard let userId = result?.user.uid else {
+                self?.loading = false
                 return
             }
             
             // If a user ID is available, insert a user record using the ID.
             self?.insertUserRecord(id: userId)
+            self?.loading = false
         }
 
         

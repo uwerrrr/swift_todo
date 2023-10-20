@@ -14,6 +14,7 @@ struct RegisterView: View {
     
     
     var body: some View {
+        // main layout
         VStack{
             // Header
             HeaderView(title: "Registrer",
@@ -36,9 +37,10 @@ struct RegisterView: View {
                 TLButton(title: "Register",
                          background: .green){
                     // Attempt registration
+                    viewModel.register()
                 }
             }
-            .offset(y:-50)
+            .offset(y:-90)
             
             
             Spacer()

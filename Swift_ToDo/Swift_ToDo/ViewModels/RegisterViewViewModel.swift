@@ -24,19 +24,24 @@ class RegisterViewViewModel: ObservableObject {
             return
         }
         
-        // create new user withFirebaseAuth
-        Auth.auth().createUser(withEmail: email, password: password) {
-            [weak self] result, error in
+        // Create a new user account with Firebase Authentication using the provided email and password.
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            // {result, error in ... } is similar to numbers.filter((number, index) => {})
+            
+            
+            // Check if a user ID is present in the result. If not, exit.
             guard let userId = result?.user.uid else {
                 return
             }
             
+            // If a user ID is available, insert a user record using the ID.
             self?.insertUserRecord(id: userId)
         }
+
         
     }
     
-    // create new user in firestore function
+    // store new user data in firestore
     private func insertUserRecord(id: String){
         let newUser = User(id: id, name: name, email: email, joined: Date().timeIntervalSince1970)
      

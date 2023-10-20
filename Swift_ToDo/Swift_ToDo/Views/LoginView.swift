@@ -40,7 +40,9 @@ struct LoginView: View {
                     if !viewModel.errMess.isEmpty {
                         Text(viewModel.errMess).foregroundColor(Color.red)
                     }
-                }.offset(y:-50)
+                }
+                .offset(y:-90)
+                
                 
                 // Create Account
                 VStack{

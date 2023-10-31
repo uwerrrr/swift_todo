@@ -25,11 +25,17 @@ struct ToDoListView: View {
             .navigationTitle("To-Do List")
             .toolbar{
                 Button {
-                    // add new to-do item
+                    // display NewItemView in sheet
+                    viewModel.showingNewItemView = true
                 } label: {
                     Image(systemName: "plus")
                 }
             }
+            // Show `NewItemView` in a sheet when `viewModel.showingNewItemView` stage is `true`.
+            .sheet(isPresented: $viewModel.showingNewItemView){
+                NewItemView()
+            }
+        
         }
     }
     
@@ -37,6 +43,6 @@ struct ToDoListView: View {
 
 struct ToDoListView_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoListView(userId: "")
+        ToDoListView(userId: "test userID")
     }
 }

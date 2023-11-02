@@ -33,7 +33,7 @@ struct ToDoListView: View {
             }
             // Show `NewItemView` in a sheet when `viewModel.showingNewItemView` stage is `true`.
             .sheet(isPresented: $viewModel.showingNewItemView){
-                NewItemView()
+                NewItemView(showingNewItemView: $viewModel.showingNewItemView)
             }
         
         }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewItemView: View {
     @StateObject var viewModel = NewItemViewViewModel()
+    @Binding var showingNewItemView: Bool // binding the showingNewItemView variable from parent view (ToDoListView)
+    
     
     var body: some View {
         VStack{
@@ -28,8 +30,20 @@ struct NewItemView: View {
                 
                 // Button
                 TLButton(title: "Save", background: .pink){
-                    viewModel.save()
+                    if viewModel.canSave {
+                        viewModel.save()
+                        showingNewItemView = false
+                    } else{
+                        // Alert
+                        viewModel.showAlert = true
+                        
+                    }
+                 
                 }
+                .padding()
+            }
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("Error"), message: Text("Please fill in all fields and select a due date that is today or newer."))
             }
         }
         
@@ -38,6 +52,8 @@ struct NewItemView: View {
 
 struct NewItemView_Previews: PreviewProvider {
     static var previews: some View {
-        NewItemView()
+        NewItemView(showingNewItemView: Binding(get:{return true}, set: { _ in
+            
+        }))
     }
 }

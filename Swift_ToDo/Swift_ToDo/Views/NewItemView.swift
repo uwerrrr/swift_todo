@@ -14,10 +14,11 @@ struct NewItemView: View {
     
     var body: some View {
         VStack{
+            
             Text("New item")
                 .font(.system(size: 32))
                 .bold()
-                .padding(.top, 60)
+                .padding(.top, 40)
         
             Form{
                 // Title

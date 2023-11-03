@@ -16,6 +16,7 @@ class NewItemViewViewModel: ObservableObject {
     
     init() {}
     
+    // save function
     func save(){
         guard canSave else{
             return
@@ -36,13 +37,13 @@ class NewItemViewViewModel: ObservableObject {
             isDone: false)
         
         
-        // Save model
+        // Save to firestore
         let db = Firestore.firestore()
         
         db.collection("users")
             .document(uId)
             .collection("todos")
-            .document("123")
+            .document(newId)
             .setData(newItem.asDictionary()) // set data as a dictionary
     }
     

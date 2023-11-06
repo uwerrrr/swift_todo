@@ -15,6 +15,31 @@ struct ProfileView: View {
         NavigationView{
             VStack {
                 Text("Welcome to your profile !")
+                
+                // Avatar
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.blue)
+                    .frame(width:125, height: 125)
+                
+                // Info: Name, email, member since
+                VStack(alignment: .leading){
+                    HStack{
+                        Text("Name: ")
+                        Text("...")
+                    }
+                    HStack{
+                        Text("Email: ")
+                        Text("...")
+                    }
+                    HStack{
+                        Text("Member since: ")
+                        Text("...")
+                    }
+                }
+                
+                // sign out
             }
             .navigationTitle("Profile")
             

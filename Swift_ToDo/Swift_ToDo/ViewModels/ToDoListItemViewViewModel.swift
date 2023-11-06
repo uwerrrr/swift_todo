@@ -9,10 +9,11 @@ import Foundation
 
 /// ViewModel for a single to-do item view (each row in the to-do list)
 class ToDoListItemViewViewModel: ObservableObject {
-    let item: ToDoListItem
-    
-    var body:
-    
+   
     init() {}
+    
+    func toggleIsDone(item: ToDoListItem){
+        
+    }
     
 }

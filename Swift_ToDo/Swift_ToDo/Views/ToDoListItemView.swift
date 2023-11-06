@@ -18,6 +18,7 @@ struct ToDoListItemView: View {
             VStack(alignment:.leading){
                 Text(item.title)
                     .bold()
+                    .padding(.bottom, 5)
                 Text("\(Date(timeIntervalSince1970: item.dueDate).formatted(date: .abbreviated, time: .shortened))")
                     .font(.footnote)
                     .foregroundColor(Color(.secondaryLabel))
@@ -29,6 +30,7 @@ struct ToDoListItemView: View {
                 viewModel.toggleIsDone(item: item)
             } label: {
                 Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(Color.blue)
             }
         }
     }

@@ -12,38 +12,65 @@ struct ProfileView: View {
     @StateObject var viewModel = ProfileViewViewModel()
     
     var body: some View {
+        
         NavigationView{
             VStack {
-                Text("Welcome to your profile !")
                 
-                // Avatar
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundColor(Color.blue)
-                    .frame(width:125, height: 125)
-                
-                // Info: Name, email, member since
-                VStack(alignment: .leading){
-                    HStack{
-                        Text("Name: ")
-                        Text("...")
-                    }
-                    HStack{
-                        Text("Email: ")
-                        Text("...")
-                    }
-                    HStack{
-                        Text("Member since: ")
-                        Text("...")
-                    }
+                if let user = viewModel.user {
+                    loadProfileView(user: user)
+                    
+                } else {
+                    Text("Loading...")
                 }
                 
-                // sign out
+            
             }
             .navigationTitle("Profile")
-            
+         
         }
+        .onAppear{
+            viewModel.fetchUser()
+        }
+    }
+    
+    @ViewBuilder
+    func loadProfileView(user: User) -> some View {
+        // Avatar
+        Image(systemName: "person.circle")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .foregroundColor(Color.blue)
+            .frame(width:125, height: 125)
+            .padding()
+        
+        // Info: Name, email, member since
+        VStack(alignment: .leading){
+            HStack{
+                Text("Name: ")
+                    .bold()
+                Text(user.name)
+            } .padding()
+      
+            HStack{
+                Text("Email: ")
+                    .bold()
+                Text(user.email)
+            } .padding()
+     
+            HStack{
+                Text("Member since: ")
+                    .bold()
+                Text("\(Date(timeIntervalSince1970: user.joined).formatted(date: .abbreviated, time: .shortened))")
+
+            } .padding()
+        }
+
+        // Log out 
+        TLButton(title: "Log Out", background: .red) {
+            viewModel.logOut()
+        }
+        
+        Spacer()
     }
 }
 

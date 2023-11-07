@@ -25,7 +25,9 @@ struct TLButton: View {
                     .bold()
             }
         }
+        .frame(height: 50)
         .padding()
+        
     }
 }
 
